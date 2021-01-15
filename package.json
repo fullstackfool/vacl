@@ -1,5 +1,5 @@
 {
-    "name": "@fullsctackfool/vacl",
+    "name": "vacl",
     "version": "0.1.0",
     "description": "Lightweight Typescript ACL library for Vue 3",
     "files": [
