@@ -93,36 +93,6 @@ export default class ACL {
     }
 
     /**
-     * Add permissions to the existing store.
-     *
-     * @param {string=permissions|roles} set
-     * @param {string|string[]} terms
-     *
-     * @returns {ACL}
-     *
-     * todo: Get the 'set' string to properly typehint as a method name eg: <M>
-     */
-    private set(set: 'roles' | 'permissions', terms: string | string[]): void {
-        this[set] = new Set(terms);
-    }
-
-    /**
-     * Add permissions to the existing store.
-     *
-     * @param {string=permissions|roles} set
-     * @param {string|string[]} terms
-     *
-     * @returns {ACL}
-     */
-    private add(set: 'roles' | 'permissions', terms: string | string[]): void {
-        if (Array.isArray(terms)) {
-            this[set] = new Set([...this[set], ...terms]);
-        } else {
-            this[set].add(terms);
-        }
-    }
-
-    /**
      * Clear the stored roles.
      *
      * @returns {ACL}
@@ -145,27 +115,136 @@ export default class ACL {
      *
      * @returns {ACL}
      */
-    public clear() {
+    public clear(): ACL {
         return this.clearRoles().clearPermissions();
     }
 
+    /**
+     * Check if all of the roles are present.
+     *
+     * @param {string|string[]} roles
+     *
+     * @returns {boolean}
+     */
+    public hasAllRoles(roles: string | string[]): boolean {
+        return this.all(this.roles, roles);
+    }
+
+    /**
+     * Check if any of the roles are present.
+     *
+     * @param {string|string[]} roles
+     *
+     * @returns {boolean}
+     */
+    public hasAnyRoles(roles: string | string[]): boolean {
+        return this.any(this.roles, roles);
+    }
+
+    /**
+     * Check if all of the roles are missing.
+     *
+     * @param {string|string[]} roles
+     *
+     * @returns {boolean}
+     */
+    public missingAllRoles(roles: string | string[]): boolean {
+        return this.none(this.roles, roles);
+    }
+
+    /**
+     * Check if any of the roles are missing.
+     *
+     * @param {string|string[]} roles
+     *
+     * @returns {boolean}
+     */
+    public missingAnyRoles(roles: string | string[]): boolean {
+        return !this.all(this.roles, roles);
+    }
+
+    /**
+     * Check if all of the permissions are present.
+     *
+     * @param {string|string[]} permissions
+     *
+     * @returns {boolean}
+     */
     public hasAllPermissions(permissions: string | string[]): boolean {
         return this.all(this.permissions, permissions);
     }
 
+    /**
+     * Check if any of the permissions are present.
+     *
+     * @param {string|string[]} permissions
+     *
+     * @returns {boolean}
+     */
     public hasAnyPermissions(permissions: string | string[]): boolean {
-        console.log(permissions);
         return this.any(this.permissions, permissions);
     }
 
+    /**
+     * Check if all of the permissions are missing.
+     *
+     * @param {string|string[]} permissions
+     *
+     * @returns {boolean}
+     */
     public missingAllPermissions(permissions: string | string[]): boolean {
+        return this.none(this.permissions, permissions);
+    }
+
+    /**
+     * Check if any of the permissions are missing.
+     *
+     * @param {string|string[]} permissions
+     *
+     * @returns {boolean}
+     */
+    public missingAnyPermissions(permissions: string | string[]): boolean {
         return !this.all(this.permissions, permissions);
     }
 
-    public missingAnyPermissions(permissions: string | string[]): boolean {
-        return !this.any(this.permissions, permissions);
+    /**
+     * Add permissions to the existing store.
+     *
+     * @param {string=permissions|roles} set
+     * @param {string|string[]} terms
+     *
+     * @returns {ACL}
+     * TODO: Get the 'set' string to properly typehint as a method name eg: <M>
+     */
+    private set(set: 'roles' | 'permissions', terms: string | string[]): void {
+        this[set] = new Set(terms);
     }
 
+    /**
+     * Add permissions to the existing store.
+     *
+     * @param {string=permissions|roles} set
+     * @param {string|string[]} terms
+     *
+     * @returns {ACL}
+     */
+    private add(set: 'roles' | 'permissions', terms: string | string[]): void {
+        if (Array.isArray(terms)) {
+            this[set] = new Set([...this[set], ...terms]);
+        } else {
+            this[set].add(terms);
+        }
+    }
+
+    /**
+     * Discern that all of the terms are present in the set.
+     *
+     * @param {Set<string>} set
+     * @param {string|string[]} terms
+     *
+     * @returns {boolean}
+     * @private
+     */
     private all(set: Set<string>, terms: string | string[]): boolean {
         if (Array.isArray(terms)) {
             return terms.every(term => set.has(term));
@@ -174,6 +253,32 @@ export default class ACL {
         return set.has(terms);
     }
 
+    /**
+     * Discern that none of the terms are present in the set.
+     *
+     * @param {Set<string>} set
+     * @param {string|string[]} terms
+     *
+     * @returns {boolean}
+     * @private
+     */
+    private none(set: Set<string>, terms: string | string[]): boolean {
+        if (Array.isArray(terms)) {
+            return terms.every(term => !set.has(term));
+        }
+
+        return !set.has(terms);
+    }
+
+    /**
+     * Discern that any of the terms are present in the set.
+     *
+     * @param {Set<string>} set
+     * @param {string|string[]} terms
+     *
+     * @returns {boolean}
+     * @private
+     */
     private any(set: Set<string>, terms: string | string[]): boolean {
         if (Array.isArray(terms)) {
             return terms.some(term => set.has(term));

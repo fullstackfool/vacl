@@ -10,6 +10,7 @@
     "types": "dist/index.d.ts",
     "scripts": {
         "test": "jest",
+        "test:coverage": "jest --coverage",
         "lint": "eslint . --fix --ext .ts",
         "build": "rollup -c",
         "watch": "rollup -cw"
