@@ -10,7 +10,8 @@
     "types": "dist/index.d.ts",
     "scripts": {
         "test": "jest",
-        "test:coverage": "jest --coverage",
+        "test:coverage": "jest --coverage --outputFile=coverage-summary",
+        "badges": "node_modules/.bin/jest-badges-readme --coverageDir=tests/coverage",
         "lint": "eslint . --fix --ext .ts",
         "build": "rollup -c",
         "watch": "rollup -cw"
@@ -28,6 +29,7 @@
     "homepage": "https://github.com/fullstackfool/vacl#readme",
     "dependencies": {},
     "devDependencies": {
+        "@olavoparno/jest-badges-readme": "^1.5.1",
         "@types/jest": "^26.0.19",
         "@types/vue": "^2.0.0",
         "@typescript-eslint/eslint-plugin": "^4.11.0",

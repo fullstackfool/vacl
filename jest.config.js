@@ -3,22 +3,27 @@ module.exports = {
     testEnvironment: 'jsdom',
     rootDir: './',
     transform: {
-        "^.+\\.[t]sx?$": "ts-jest"
+        '^.+\\.[t]sx?$': 'ts-jest'
     },
     collectCoverageFrom: [
         '<rootDir>/src/**/*.ts',
         '!<rootDir>/src/index.ts'
     ],
-    cacheDirectory: "<rootDir>/tests/cache",
-    coverageDirectory: "<rootDir>/tests/coverage",
-    coverageProvider: "babel",
-    coverageReporters: ["json", "text-summary"],
+    cacheDirectory: '<rootDir>/tests/cache',
+    coverageDirectory: '<rootDir>/tests/coverage',
+    coverageProvider: 'babel',
+    coverageReporters: [
+        'json',
+        'text-summary',
+        'json-summary',
+        'lcov'
+    ],
     testMatch: [
-        "<rootDir>tests/**/*(*.)@(test).[tj]s?(x)"
+        '<rootDir>tests/**/*(*.)@(test).[tj]s?(x)'
     ],
     automock: false,
     unmockedModulePathPatterns: [
-        "<rootDir>/node_modules/"
+        '<rootDir>/node_modules/'
     ],
     errorOnDeprecated: true,
     testPathIgnorePatterns: [
@@ -31,9 +36,9 @@ module.exports = {
         window: {}
     },
     extraGlobals: [
-        "Function",
-        "Array",
-        "String",
-        "Math"
+        'Function',
+        'Array',
+        'String',
+        'Math'
     ]
 };
