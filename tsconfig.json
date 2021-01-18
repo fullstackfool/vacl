@@ -50,7 +50,8 @@
         "typings/**/*.ts"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "dist"
     ],
     "$schema": "https://json.schemastore.org/tsconfig"
 }
