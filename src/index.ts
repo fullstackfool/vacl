@@ -28,8 +28,8 @@ function commentNode(el: HTMLElement) {
 }
 
 export default {
-    install: (app: App, config: Config): void => {
-        const acl = app.config.globalProperties.$vacl = new ACL(config);
+    install: (app: App, options?: Config) => {
+        const acl = app.config.globalProperties.$vacl = new ACL(options);
 
         app.directive('can', {
             mounted(el: HTMLElement, binding) {
