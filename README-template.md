@@ -11,13 +11,13 @@
 | -----------|----------|-----------|-------|
 | ![Statements](#statements#) | ![Branches](#branches#) | ![Functions](#functions#) | ![Lines](#lines#) |
 
-  <p align="center">
-    A lightweight, strictly-typed, Vue 3 ACL directives library.
-    <br />
-    <a href="https://github.com/fullstackfool/vacl/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/fullstackfool/vacl/issues">Request Feature</a>
-  </p>
+<p align="center">
+  A lightweight, strictly-typed, Vue 3 ACL directives library.
+  <br />
+  <a href="https://github.com/fullstackfool/vacl/issues">Report Bug</a>
+  ·
+  <a href="https://github.com/fullstackfool/vacl/issues">Request Feature</a>
+</p>
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -36,7 +36,14 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li>
+      <a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#directives">Directives</a></li>
+        <li><a href="#direct-invocation">Direct Invocation</a></li>
+      </ul>
+    </li>
+    <li><a href="#advanced-configuration">Advanced Configuration</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -133,9 +140,10 @@ consider one of the following:
 ## Usage
 
 ### Directives
+
 To show or remove an element based on permissions:
 
-```html
+```vue
 <!---If the delete permission is matched-->
 <button v-can="'delete'">Delete</button>
 
@@ -148,7 +156,7 @@ To show or remove an element based on permissions:
 
 Roles work exactly same, using the `has` directive:
 
-```html
+```vue
 <!---If the staff role is matched-->
 <button v-has="'staff'">Delete</button>
 
@@ -161,7 +169,7 @@ Roles work exactly same, using the `has` directive:
 
 There are also inverse directives, should you need them:
 
-```html
+```vue
 <!---If the delete permission is missing-->
 <button v-cannot="'delete'">Contact an Admin</button>
 
@@ -174,7 +182,7 @@ There are also inverse directives, should you need them:
 
 For roles:
 
-```html
+```vue
 <!---If the staff role is missing-->
 <button v-hasnt="'staff'">Contact an Admin</button>
 
@@ -185,8 +193,39 @@ For roles:
 <button v-hasnt:all="'staff,editor'">Contact an Admin</button>
 ```
 
-### Direct ACL Access
-// TBA
+
+### Direct Invocation
+
+If you need something more complex you can access the Vacl instance directly:
+
+```vue
+<button v-if="$vacl.can('delete') || $vacl.has('admin')">Delete</button>
+```
+
+
+
+<!-- ADVANCED CONFIGURATION -->
+## Advanced Configuration
+
+When initialising (`app.use(Vacl, config)`) there are additional properties you can set:
+
+| Property  | Default | Description |
+| --------- | ------- | ----------- |
+| permissions | `[ ]` | Array of permission strings that the user has, eg: `['view jobs', 'edit posts']` |
+| roles | `[ ]` | Array of role strings that the user has, eg: `['admin', 'sales']` |
+| forceRemove | `false` | By default a directive that fails a check, like `v-can`, will set the element to `display: hidden`. If `forceRemove` is set to `true` then the element will be removed from the DOM entirely. This might be especially desirable when using on active components, but carries the cost of removing the element from the Vue reactivity watchers. |
+
+
+
+<!-- REACTIVITY -->
+## Reactivity
+
+There are limitations regarding the reactivity in Vue. For instance once an element is 
+removed via a directive it is not currently possible to re-insert it should the user gain
+the necessary role/permission - a page refresh is required. This is an issue with all
+Vue acl-directive packages, but we are currently investigating work-arounds.
+
+
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -228,6 +267,7 @@ NPM - [https://www.npmjs.com/package/vacl](https://www.npmjs.com/package/vacl)
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
+
 Below is a list of those who have helped with excellent peer review and feedback during development.
 
 * [nandi95](https://github.com/nandi95/)
