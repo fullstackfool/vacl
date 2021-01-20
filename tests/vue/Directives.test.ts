@@ -13,8 +13,8 @@ test('it will show an element if the single permission is matched', () => {
          <div v-can="'edit'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 test('it will show an element if any of the permissions match', () => {
@@ -24,8 +24,8 @@ test('it will show an element if any of the permissions match', () => {
          <div v-can:any="'delete,archive'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 test('it will show an element if all of the permissions match', () => {
@@ -35,8 +35,8 @@ test('it will show an element if all of the permissions match', () => {
          <div v-can:all="'delete,archive'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 test('it will show an element if the permission is missing', () => {
@@ -46,8 +46,8 @@ test('it will show an element if the permission is missing', () => {
          <div v-cannot="'edit'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 test('it will show an element if some of the permissions are missing', () => {
@@ -57,8 +57,8 @@ test('it will show an element if some of the permissions are missing', () => {
          <div v-cannot:any="'delete,archive'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 test('it will show an element if all of the permissions are missing', () => {
@@ -68,8 +68,8 @@ test('it will show an element if all of the permissions are missing', () => {
          <div v-cannot:all="'delete,archive'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 
@@ -83,8 +83,8 @@ test('it will show an element if the single role is matched', () => {
          <div v-has="'supervisor'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 test('it will show an element if any of the roles match', () => {
@@ -94,8 +94,8 @@ test('it will show an element if any of the roles match', () => {
          <div v-has:any="'manager,admin'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 test('it will show an element if all of the roles match', () => {
@@ -105,8 +105,8 @@ test('it will show an element if all of the roles match', () => {
          <div v-has:all="'manager,admin'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 test('it will show an element if the role is missing', () => {
@@ -116,8 +116,8 @@ test('it will show an element if the role is missing', () => {
          <div v-hasnt="'staff'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 test('it will show an element if some of the roles are missing', () => {
@@ -127,8 +127,8 @@ test('it will show an element if some of the roles are missing', () => {
          <div v-hasnt:any="'manager,admin'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 test('it will show an element if all of the roles are missing', () => {
@@ -138,8 +138,8 @@ test('it will show an element if all of the roles are missing', () => {
          <div v-hasnt:all="'manager,admin'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
 
 
@@ -147,15 +147,35 @@ test('it will show an element if all of the roles are missing', () => {
  * PERMISSIONS + ROLES
  *****************************************************************************/
 test('it will show an element if both the permissions and roles match', () => {
-    const acl = new ACL({ permissions:['view'], roles: ['manager'] });
+    const acl = new ACL({ permissions: ['view'], roles: ['manager'] });
     const wrapper = getWrapper(acl,
         `<div v-can="'view'" v-has="'manager'" data-test='visible'></div>
          <div v-can="'edit'" v-has="'admin'" data-test='hidden'></div>`
     );
 
-    expect(wrapper.find('[data-test="visible"]').exists()).toBeTruthy();
-    expect(wrapper.find('[data-test="hidden"]').exists()).toBeFalsy();
+    expect(wrapper.find('[data-test="visible"]').isVisible()).toBeTruthy();
+    expect(wrapper.find('[data-test="hidden"]').isVisible()).toBeFalsy();
 });
+
+/******************************************************************************
+ * DOM REMOVAL
+ *****************************************************************************/
+test('it will also remove the element if configured', () => {
+    const acl = new ACL({ permissions: ['view'], roles: ['staff'], forceRemove: true });
+    const wrapper = getWrapper(acl,
+        `<div v-can="'view'" data-test='existing-permission'></div>
+         <div v-can="'edit'" data-test='removed-permission'></div>
+         <div v-has="'staff'" data-test='existing-role'></div>
+         <div v-has="'admin'" data-test='removed-role'></div>`
+    );
+
+    expect(wrapper.find('[data-test="existing-permission"]').exists()).toBeTruthy();
+    expect(wrapper.find('[data-test="removed-permission"]').exists()).toBeFalsy();
+
+    expect(wrapper.find('[data-test="existing-role"]').exists()).toBeTruthy();
+    expect(wrapper.find('[data-test="removed-role"]').exists()).toBeFalsy();
+});
+
 
 /**
  * Create a test wrapper.

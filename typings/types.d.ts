@@ -5,3 +5,9 @@ declare module '@vue/runtime-core' {
         $vacl: ACL;
     }
 }
+
+export type Config = {
+    roles?: string[];
+    permissions?: string[];
+    forceRemove?: boolean;
+};

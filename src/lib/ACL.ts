@@ -1,14 +1,9 @@
-export type Config = {
-    roles?: Roles;
-    permissions?: Permissions;
-};
-
-export type Roles = string[];
-export type Permissions = string[];
+import { Config } from '../../typings/types';
 
 export default class ACL {
     private roles: Set<string>;
     private permissions: Set<string>;
+    public readonly forceRemove: boolean;
 
     /**
      * ACL constructor.
@@ -20,6 +15,7 @@ export default class ACL {
     constructor(config: Config | null = null) {
         this.roles = new Set(config?.roles ?? []);
         this.permissions = new Set(config?.permissions ?? []);
+        this.forceRemove = config?.forceRemove ?? false;
     }
 
     /**
@@ -47,7 +43,7 @@ export default class ACL {
      *
      * @returns {ACL}
      */
-    public setRoles(roles: Roles): ACL {
+    public setRoles(roles: string[]): ACL {
         this.set('roles', roles);
 
         return this;
@@ -60,7 +56,7 @@ export default class ACL {
      *
      * @returns {ACL}
      */
-    public setPermissions(permissions: Permissions): ACL {
+    public setPermissions(permissions: string[]): ACL {
         this.set('permissions', permissions);
 
         return this;
@@ -73,7 +69,7 @@ export default class ACL {
      *
      * @returns {ACL}
      */
-    public addRoles(roles: string | Roles): ACL {
+    public addRoles(roles: string | string[]): ACL {
         this.add('roles', roles);
 
         return this;
@@ -86,7 +82,7 @@ export default class ACL {
      *
      * @returns {ACL}
      */
-    public addPermissions(permissions: string | Permissions): ACL {
+    public addPermissions(permissions: string | string[]): ACL {
         this.add('permissions', permissions);
 
         return this;
@@ -117,6 +113,18 @@ export default class ACL {
      */
     public clear(): ACL {
         return this.clearRoles().clearPermissions();
+    }
+
+    /**
+     * Check if all of the roles are present.
+     *
+     * @param {string|string[]} roles
+     *
+     * @see hasAllRoles
+     * @returns {boolean}
+     */
+    public has(roles: string | string[]): boolean {
+        return this.hasAllRoles(roles);
     }
 
     /**
@@ -161,6 +169,18 @@ export default class ACL {
      */
     public missingAnyRoles(roles: string | string[]): boolean {
         return !this.all(this.roles, roles);
+    }
+
+    /**
+     * Check if all of the permissions are present.
+     *
+     * @param {string|string[]} permissions
+     *
+     * @see hasAllPermissions
+     * @returns {boolean}
+     */
+    public can(permissions: string | string[]): boolean {
+        return this.hasAllPermissions(permissions);
     }
 
     /**

@@ -12,7 +12,7 @@ export function can(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
     return (el: HTMLElement, binding: DirectiveBinding): void => {
         if (!binding.arg) {
             if (acl.missingAnyPermissions(binding.value)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
 
             return;
@@ -22,13 +22,13 @@ export function can(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
 
         if (binding.arg === 'any') {
             if (!acl.hasAnyPermissions(values)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
         }
 
         if (binding.arg === 'all') {
             if (!acl.hasAllPermissions(values)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
         }
     };
@@ -45,7 +45,7 @@ export function cannot(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
     return (el: HTMLElement, binding: DirectiveBinding): void => {
         if (!binding.arg) {
             if (acl.hasAllPermissions(binding.value)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
 
             return;
@@ -55,13 +55,13 @@ export function cannot(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
 
         if (binding.arg === 'any') {
             if (!acl.missingAnyPermissions(values)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
         }
 
         if (binding.arg === 'all') {
             if (!acl.missingAllPermissions(values)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
         }
     };
@@ -78,7 +78,7 @@ export function has(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
     return (el: HTMLElement, binding: DirectiveBinding): void => {
         if (!binding.arg) {
             if (acl.missingAnyRoles(binding.value)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
 
             return;
@@ -88,13 +88,13 @@ export function has(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
 
         if (binding.arg === 'any') {
             if (!acl.hasAnyRoles(values)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
         }
 
         if (binding.arg === 'all') {
             if (!acl.hasAllRoles(values)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
         }
     };
@@ -111,7 +111,7 @@ export function hasnt(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
     return (el: HTMLElement, binding: DirectiveBinding): void => {
         if (!binding.arg) {
             if (acl.hasAllRoles(binding.value)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
 
             return;
@@ -121,20 +121,47 @@ export function hasnt(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
 
         if (binding.arg === 'any') {
             if (!acl.missingAnyRoles(values)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
         }
 
         if (binding.arg === 'all') {
             if (!acl.missingAllRoles(values)) {
-                commentNode(el);
+                handleNode(acl, el);
             }
         }
     };
 }
 
 /**
- * Remove the element from the DOM.
+ * Handle the node based on the ACL settings.
+ *
+ * @param {ACL} acl
+ * @param {HTMLElement} el
+ *
+ * @returns {void}
+ */
+function handleNode(acl: ACL, el: HTMLElement): void {
+    if (acl.forceRemove) {
+        return commentNode(el);
+    }
+
+    hideNode(el);
+}
+
+/**
+ * Hide an element in the DOM.
+ *
+ * @param {HTMLElement} el
+ *
+ * @returns {void}
+ */
+function hideNode(el: HTMLElement): void {
+    el.style.display = 'none';
+}
+
+/**
+ * Remove an element from the DOM.
  *
  * @param {HTMLElement} el
  *
@@ -147,19 +174,6 @@ function commentNode(el: HTMLElement): void {
     Object.defineProperty(comment, 'setAttribute', {
         value: () => undefined
     });
-
-    // TODO: Find Vue3 alternative for below.
-    // vnode.text = ' ';
-    // vnode.elm = comment;
-    // vnode.isComment = true;
-    // vnode.context = undefined;
-    // vnode.tag = undefined;
-    // if (vnode.data) {
-    //     vnode.data.directives = undefined;
-    // }
-    // if (vnode.componentInstance) {
-    //     vnode.componentInstance.$el = comment;
-    // }
 
     if (el.parentNode) {
         el.parentNode.replaceChild(comment, el);
