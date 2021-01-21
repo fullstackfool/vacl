@@ -1,3 +1,7 @@
+| Statements | Branches | Functions | Lines |
+| -----------|----------|-----------|-------|
+| ![Statements](#statements#) | ![Branches](#branches#) | ![Functions](#functions#) | ![Lines](#lines#) |
+
 <!-- PROJECT LOGO -->
 <p align="center">
   <!--<a href="https://github.com/fullstackfool/vacl">
@@ -6,10 +10,6 @@
 
   <h1 align="center">Vacl</h1>
 </p>
-
-| Statements | Branches | Functions | Lines |
-| -----------|----------|-----------|-------|
-| ![Statements](#statements#) | ![Branches](#branches#) | ![Functions](#functions#) | ![Lines](#lines#) |
 
 <p align="center">
   A lightweight, strictly-typed, Vue 3 ACL directives library.

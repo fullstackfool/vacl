@@ -1,3 +1,7 @@
+| Statements | Branches | Functions | Lines |
+| -----------|----------|-----------|-------|
+| ![Statements](https://img.shields.io/badge/Coverage-99.04%25-brightgreen.svg "Make me better!") | ![Branches](https://img.shields.io/badge/Coverage-98.51%25-brightgreen.svg "Make me better!") | ![Functions](https://img.shields.io/badge/Coverage-97.5%25-brightgreen.svg "Make me better!") | ![Lines](https://img.shields.io/badge/Coverage-99.01%25-brightgreen.svg "Make me better!") |
+
 <!-- PROJECT LOGO -->
 <p align="center">
   <!--<a href="https://github.com/fullstackfool/vacl">
@@ -6,10 +10,6 @@
 
   <h1 align="center">Vacl</h1>
 </p>
-
-| Statements | Branches | Functions | Lines |
-| -----------|----------|-----------|-------|
-| ![Statements](https://img.shields.io/badge/Coverage-99.04%25-brightgreen.svg "Make me better!") | ![Branches](https://img.shields.io/badge/Coverage-98.51%25-brightgreen.svg "Make me better!") | ![Functions](https://img.shields.io/badge/Coverage-97.5%25-brightgreen.svg "Make me better!") | ![Lines](https://img.shields.io/badge/Coverage-99.01%25-brightgreen.svg "Make me better!") |
 
 <p align="center">
   A lightweight, strictly-typed, Vue 3 ACL directives library.
