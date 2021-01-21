@@ -234,10 +234,13 @@ export default class ACL {
      * @param {string|string[]} terms
      *
      * @returns {ACL}
-     * TODO: Get the 'set' string to properly typehint as a method name eg: <M>
      */
     private set(set: 'roles' | 'permissions', terms: string | string[]): void {
-        this[set] = new Set(terms);
+        if (set === 'roles') {
+            this.roles = new Set(terms);
+        } else {
+            this.permissions = new Set(terms);
+        }
     }
 
     /**
