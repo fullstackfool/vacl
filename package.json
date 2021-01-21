@@ -1,6 +1,6 @@
 {
     "name": "vacl",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "A Lightweight Typescript ACL directives library for Vue 3",
     "files": [
         "dist"
