@@ -206,22 +206,22 @@ There are also a number of methods you can leverage on the `$vacl` instance:
 
 | Method | Argument | Description |
 | ------ | --------- | ----------- |
-| `can()` | <code>string[] \| string</code> | Shorthand accessor for `hasAllPermissions()`. |
-| `hasAllPermissions()` | <code>string[] \| string</code> | Assert the store has all of the passed permission(s). |
-| `hasAnyPermissions()` | <code>string[] \| string</code> | Assert the store has any of the passed permission(s). |
-| `missingAllPermissions()` | <code>string[] \| string</code> | Assert the store is missing all of the passed permission(s). |
-| `missingAnyPermissions()` | <code>string[] \| string</code> | Assert the store is missing at least 1 of the passed permission(s). |
-| `has()` | <code>string[] \| string</code> | Shorthand accessor for `hasAllRoles()`. |
-| `hasAllRoles()` | <code>string[] \| string</code> | Assert the store has all of the passed role(s). |
-| `hasAnyRoles()` | <code>string[] \| string</code> | Assert the store has any of the passed role(s). |
-| `missingAllRoles()` | <code>string[] \| string</code> | Assert the store is missing all of the passed role(s). |
-| `missingAnyRoles()` | <code>string[] \| string</code> | Assert the store is missing at least 1 of the passed role(s). |
+| `can()` |<code>string[]</code><br/><code>string</code> | Shorthand accessor for `hasAllPermissions()`. |
+| `hasAllPermissions()` |<code>string[]</code><br/><code>string</code> | Assert the store has all of the passed permission(s). |
+| `hasAnyPermissions()` |<code>string[]</code><br/><code>string</code> | Assert the store has any of the passed permission(s). |
+| `missingAllPermissions()` |<code>string[]</code><br/><code>string</code> | Assert the store is missing all of the passed permission(s). |
+| `missingAnyPermissions()` |<code>string[]</code><br/><code>string</code> | Assert the store is missing at least 1 of the passed permission(s). |
+| `has()` |<code>string[]</code><br/><code>string</code> | Shorthand accessor for `hasAllRoles()`. |
+| `hasAllRoles()` |<code>string[]</code><br/><code>string</code> | Assert the store has all of the passed role(s). |
+| `hasAnyRoles()` |<code>string[]</code><br/><code>string</code> | Assert the store has any of the passed role(s). |
+| `missingAllRoles()` |<code>string[]</code><br/><code>string</code> | Assert the store is missing all of the passed role(s). |
+| `missingAnyRoles()` |<code>string[]</code><br/><code>string</code> | Assert the store is missing at least 1 of the passed role(s). |
 | `getRoles()` | - | Gets the array of currently stored roles. |
 | `getPermissions()` | - | Gets the array of currently stored permissions. |
 | `setRoles()` | `string[]` | Overwrites the role store with the passed array. |
 | `setPermissions()` | `string[]` | Overwrites the permission store with the passed array. |
-| `addRoles()` | <code>string[] \| string</code> | Adds the given role(s) to the role store. |
-| `addPermissions()` | <code>string \| string[]</code> | Adds the given permission(s) to the permission store. |
+| `addRoles()` |<code>string[]</code><br/><code>string</code> | Adds the given role(s) to the role store. |
+| `addPermissions()` |<code>string</code><br/><code>string[]</code> | Adds the given permission(s) to the permission store. |
 | `clearRoles()` | - | Clears the currently stored roles. |
 | `clearPermissions()` | - | Clears the currently stored permissions. |
 | `clear()` | - | Clears both the role and permission store. |
