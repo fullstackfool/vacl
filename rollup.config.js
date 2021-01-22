@@ -18,11 +18,12 @@ export default {
         }
     ],
     external: [
-        ...Object.keys(pkg.dependencies || {}),
+        ...Object.keys(pkg.dependencies || {})
     ],
     plugins: [
         typescript({
-            typescript: require('typescript')
+            typescript: require('typescript'),
+            tsconfig: './tsconfig.json'
         }),
         terser(),
         bundleSize()

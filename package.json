@@ -1,6 +1,6 @@
 {
     "name": "vacl",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "A Lightweight Typescript ACL directives library for Vue 3",
     "files": [
         "dist"
@@ -27,7 +27,7 @@
         "permissions",
         "roles"
     ],
-    "author": "John Doe <k.a.davies@hotmail.co.uk>",
+    "author": "Karl Davies <k.a.davies@hotmail.co.uk>",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/fullstackfool/vacl/issues"

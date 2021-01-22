@@ -1,8 +1,10 @@
-import { Config } from '../../typings/types';
+import type { Config } from '../../types/config';
 
 export default class ACL {
     private roles: Set<string>;
+
     private permissions: Set<string>;
+
     public readonly forceRemove: boolean;
 
     /**
@@ -12,7 +14,7 @@ export default class ACL {
      *
      * @returns {ACL}
      */
-    constructor(config: Config | null = null) {
+    public constructor(config: Config | null = null) {
         this.roles = new Set(config?.roles ?? []);
         this.permissions = new Set(config?.permissions ?? []);
         this.forceRemove = config?.forceRemove ?? false;
@@ -69,7 +71,7 @@ export default class ACL {
      *
      * @returns {ACL}
      */
-    public addRoles(roles: string | string[]): ACL {
+    public addRoles(roles: string[] | string): ACL {
         this.add('roles', roles);
 
         return this;
@@ -82,7 +84,7 @@ export default class ACL {
      *
      * @returns {ACL}
      */
-    public addPermissions(permissions: string | string[]): ACL {
+    public addPermissions(permissions: string[] | string): ACL {
         this.add('permissions', permissions);
 
         return this;
@@ -123,7 +125,7 @@ export default class ACL {
      * @see hasAllRoles
      * @returns {boolean}
      */
-    public has(roles: string | string[]): boolean {
+    public has(roles: string[] | string): boolean {
         return this.hasAllRoles(roles);
     }
 
@@ -134,7 +136,7 @@ export default class ACL {
      *
      * @returns {boolean}
      */
-    public hasAllRoles(roles: string | string[]): boolean {
+    public hasAllRoles(roles: string[] | string): boolean {
         return this.all(this.roles, roles);
     }
 
@@ -145,7 +147,7 @@ export default class ACL {
      *
      * @returns {boolean}
      */
-    public hasAnyRoles(roles: string | string[]): boolean {
+    public hasAnyRoles(roles: string[] | string): boolean {
         return this.any(this.roles, roles);
     }
 
@@ -156,7 +158,7 @@ export default class ACL {
      *
      * @returns {boolean}
      */
-    public missingAllRoles(roles: string | string[]): boolean {
+    public missingAllRoles(roles: string[] | string): boolean {
         return this.none(this.roles, roles);
     }
 
@@ -167,7 +169,7 @@ export default class ACL {
      *
      * @returns {boolean}
      */
-    public missingAnyRoles(roles: string | string[]): boolean {
+    public missingAnyRoles(roles: string[] | string): boolean {
         return !this.all(this.roles, roles);
     }
 
@@ -179,7 +181,7 @@ export default class ACL {
      * @see hasAllPermissions
      * @returns {boolean}
      */
-    public can(permissions: string | string[]): boolean {
+    public can(permissions: string[] | string): boolean {
         return this.hasAllPermissions(permissions);
     }
 
@@ -190,7 +192,7 @@ export default class ACL {
      *
      * @returns {boolean}
      */
-    public hasAllPermissions(permissions: string | string[]): boolean {
+    public hasAllPermissions(permissions: string[] | string): boolean {
         return this.all(this.permissions, permissions);
     }
 
@@ -201,7 +203,7 @@ export default class ACL {
      *
      * @returns {boolean}
      */
-    public hasAnyPermissions(permissions: string | string[]): boolean {
+    public hasAnyPermissions(permissions: string[] | string): boolean {
         return this.any(this.permissions, permissions);
     }
 
@@ -212,7 +214,7 @@ export default class ACL {
      *
      * @returns {boolean}
      */
-    public missingAllPermissions(permissions: string | string[]): boolean {
+    public missingAllPermissions(permissions: string[] | string): boolean {
         return this.none(this.permissions, permissions);
     }
 
@@ -223,7 +225,7 @@ export default class ACL {
      *
      * @returns {boolean}
      */
-    public missingAnyPermissions(permissions: string | string[]): boolean {
+    public missingAnyPermissions(permissions: string[] | string): boolean {
         return !this.all(this.permissions, permissions);
     }
 
@@ -235,7 +237,7 @@ export default class ACL {
      *
      * @returns {ACL}
      */
-    private set(set: 'roles' | 'permissions', terms: string | string[]): void {
+    private set(set: 'permissions' | 'roles', terms: string[] | string): void {
         if (set === 'roles') {
             this.roles = new Set(terms);
         } else {
@@ -251,7 +253,7 @@ export default class ACL {
      *
      * @returns {ACL}
      */
-    private add(set: 'roles' | 'permissions', terms: string | string[]): void {
+    private add(set: 'permissions' | 'roles', terms: string[] | string): void {
         if (Array.isArray(terms)) {
             this[set] = new Set([...this[set], ...terms]);
         } else {
@@ -268,7 +270,7 @@ export default class ACL {
      * @returns {boolean}
      * @private
      */
-    private all(set: Set<string>, terms: string | string[]): boolean {
+    private all(set: Set<string>, terms: string[] | string): boolean {
         if (Array.isArray(terms)) {
             return terms.every(term => set.has(term));
         }
@@ -285,7 +287,7 @@ export default class ACL {
      * @returns {boolean}
      * @private
      */
-    private none(set: Set<string>, terms: string | string[]): boolean {
+    private none(set: Set<string>, terms: string[] | string): boolean {
         if (Array.isArray(terms)) {
             return terms.every(term => !set.has(term));
         }
@@ -302,7 +304,7 @@ export default class ACL {
      * @returns {boolean}
      * @private
      */
-    private any(set: Set<string>, terms: string | string[]): boolean {
+    private any(set: Set<string>, terms: string[] | string): boolean {
         if (Array.isArray(terms)) {
             return terms.some(term => set.has(term));
         }

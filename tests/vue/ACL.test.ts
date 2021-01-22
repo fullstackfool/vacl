@@ -3,7 +3,7 @@ import { createApp, h } from 'vue';
 import ACL from '../../src/lib/ACL';
 import Vacl from '../../src/index';
 
-describe('Reactivity', () => {
+describe('reactivity', () => {
     it('can be installed correctly', () => {
         const app = createApp({
             template: '<div></div>'

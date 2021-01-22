@@ -1,4 +1,4 @@
-import { Directive, DirectiveBinding } from '@vue/runtime-core';
+import type { Directive, DirectiveBinding } from '@vue/runtime-core';
 import type ACL from './ACL';
 
 /**
@@ -10,6 +10,8 @@ import type ACL from './ACL';
  */
 export function can(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
     return (el: HTMLElement, binding: DirectiveBinding): void => {
+        const value = getBindingValue(binding, 'can');
+
         if (!binding.arg) {
             if (acl.missingAnyPermissions(binding.value)) {
                 handleNode(acl, el);
@@ -18,7 +20,7 @@ export function can(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
             return;
         }
 
-        const values = binding.value.split(',');
+        const values = value.split(',');
 
         if (binding.arg === 'any') {
             if (!acl.hasAnyPermissions(values)) {
@@ -43,6 +45,8 @@ export function can(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
  */
 export function cannot(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
     return (el: HTMLElement, binding: DirectiveBinding): void => {
+        const value = getBindingValue(binding, 'cannot');
+
         if (!binding.arg) {
             if (acl.hasAllPermissions(binding.value)) {
                 handleNode(acl, el);
@@ -51,7 +55,7 @@ export function cannot(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
             return;
         }
 
-        const values = binding.value.split(',');
+        const values = value.split(',');
 
         if (binding.arg === 'any') {
             if (!acl.missingAnyPermissions(values)) {
@@ -76,6 +80,8 @@ export function cannot(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
  */
 export function has(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
     return (el: HTMLElement, binding: DirectiveBinding): void => {
+        const value = getBindingValue(binding, 'has');
+
         if (!binding.arg) {
             if (acl.missingAnyRoles(binding.value)) {
                 handleNode(acl, el);
@@ -84,7 +90,7 @@ export function has(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
             return;
         }
 
-        const values = binding.value.split(',');
+        const values = value.split(',');
 
         if (binding.arg === 'any') {
             if (!acl.hasAnyRoles(values)) {
@@ -109,6 +115,8 @@ export function has(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
  */
 export function hasnt(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
     return (el: HTMLElement, binding: DirectiveBinding): void => {
+        const value = getBindingValue(binding, 'hasnt');
+
         if (!binding.arg) {
             if (acl.hasAllRoles(binding.value)) {
                 handleNode(acl, el);
@@ -117,7 +125,7 @@ export function hasnt(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
             return;
         }
 
-        const values = binding.value.split(',');
+        const values = value.split(',');
 
         if (binding.arg === 'any') {
             if (!acl.missingAnyRoles(values)) {
@@ -134,6 +142,27 @@ export function hasnt(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
 }
 
 /**
+ * Validate the binding passed to the directive.
+ *
+ * @param {any} binding
+ * @param {string} method
+ *
+ * @throws {Error}
+ * @returns {string}
+ */
+function getBindingValue(binding: DirectiveBinding, method: string): string {
+    if (typeof binding.value !== 'string') {
+        throw Error('Value passed to v-' + method + ' should be of type string.');
+    }
+
+    if (!binding.value.length || binding.value === ' ') {
+        throw Error('Value passed to v-' + method + ' is empty.');
+    }
+
+    return binding.value;
+}
+
+/**
  * Handle the node based on the ACL settings.
  *
  * @param {ACL} acl
@@ -143,7 +172,8 @@ export function hasnt(acl: ACL): Directive<HTMLElement, DirectiveBinding> {
  */
 function handleNode(acl: ACL, el: HTMLElement): void {
     if (acl.forceRemove) {
-        return commentNode(el);
+        commentNode(el);
+        return;
     }
 
     hideNode(el);

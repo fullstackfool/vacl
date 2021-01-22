@@ -1,41 +1,30 @@
 {
     "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
-        "moduleResolution": "node",
-        "outDir": "./dist",
         "declaration": true,
-        "experimentalDecorators": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "baseUrl": ".",
-        "types": [
-            "jest",
-            "node"
-        ],
-        "paths": {
-            "@/*": [
-                "src/*"
-            ]
-        },
-        "lib": [
-            "esnext",
-            "dom",
-            "dom.iterable",
-            "scripthost"
-        ],
-        // compilation
+        "declarationDir": "types",
+        "declarationMap": true,
+
+        "module": "ES2015",
+        "rootDir": "src",
         "preserveConstEnums": false,
         "sourceMap": true,
-        "downlevelIteration": true,
+        "downlevelIteration": false,
         "isolatedModules": true,
-        "incremental": true,
+        "esModuleInterop": true,
+        "importHelpers": true,
+        "lib": [
+            "ES2015",
+            "DOM"
+        ],
+        "target": "ES2015",
+
+        "noEmitOnError": true,
+        "moduleResolution": "node",
         "removeComments": false,
         "pretty": true,
-        "importHelpers": true,
-        // code quality
+
         "noImplicitReturns": true,
+        "allowSyntheticDefaultImports": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "forceConsistentCasingInFileNames": true,
@@ -45,12 +34,11 @@
         "allowUnreachableCode": false
     },
     "include": [
-        "src/**/*.ts",
-        "tests/**/*.ts",
-        "typings/**/*.ts"
+        "src/index.ts"
     ],
     "exclude": [
-        "node_modules",
+        "**/node_modules/",
+        "**/.*",
         "dist"
     ],
     "$schema": "https://json.schemastore.org/tsconfig"

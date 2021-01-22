@@ -1,6 +1,6 @@
 import ACL from '../../src/lib/ACL';
 
-describe('ACL', () => {
+describe('aCL', () => {
     it('can_be_instantiated', () => {
         const acl = new ACL();
 

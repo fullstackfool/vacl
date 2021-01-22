@@ -1,6 +1,6 @@
 import { can, cannot, has, hasnt } from './lib/Directives';
 import type { App } from '@vue/runtime-core';
-import type { Config } from '../typings/types';
+import type { Config } from '../types/config';
 import ACL from './lib/ACL';
 
 export default {
