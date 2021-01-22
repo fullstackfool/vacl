@@ -1,4 +1,4 @@
-import ACL from '../../src/lib/ACL';
+import ACL from '@/lib/ACL';
 
 describe('aCL', () => {
     it('can_be_instantiated', () => {

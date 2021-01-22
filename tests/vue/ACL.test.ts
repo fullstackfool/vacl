@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { createApp, h } from 'vue';
-import ACL from '../../src/lib/ACL';
-import Vacl from '../../src/index';
+import ACL from '@/lib/ACL';
+import Vacl from '@/index';
 
 describe('reactivity', () => {
     it('can be installed correctly', () => {
