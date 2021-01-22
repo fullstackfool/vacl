@@ -1,6 +1,6 @@
 | Statements | Branches | Functions | Lines |
 | -----------|----------|-----------|-------|
-| ![Statements](https://img.shields.io/badge/Coverage-99.04%25-brightgreen.svg "Make me better!") | ![Branches](https://img.shields.io/badge/Coverage-98.51%25-brightgreen.svg "Make me better!") | ![Functions](https://img.shields.io/badge/Coverage-97.5%25-brightgreen.svg "Make me better!") | ![Lines](https://img.shields.io/badge/Coverage-99.01%25-brightgreen.svg "Make me better!") |
+| ![Statements](https://img.shields.io/badge/Coverage-97.41%25-brightgreen.svg "Make me better!") | ![Branches](https://img.shields.io/badge/Coverage-96%25-brightgreen.svg "Make me better!") | ![Functions](https://img.shields.io/badge/Coverage-97.56%25-brightgreen.svg "Make me better!") | ![Lines](https://img.shields.io/badge/Coverage-97.35%25-brightgreen.svg "Make me better!") |
 
 <!-- PROJECT LOGO -->
 <p align="center">
@@ -202,6 +202,30 @@ If you need something more complex you can access the Vacl instance directly:
 <button v-if="$vacl.can('delete') || $vacl.has('admin')">Delete</button>
 ```
 
+There are also a number of methods you can leverage on the `$vacl` instance:
+
+| Method | Argument | Description |
+| ------ | --------- | ----------- |
+| `can()` | <code>string[] \| string</code> | Shorthand accessor for `hasAllPermissions()`. |
+| `hasAllPermissions()` | <code>string[] \| string</code> | Assert the store has all of the passed permission(s). |
+| `hasAnyPermissions()` | <code>string[] \| string</code> | Assert the store has any of the passed permission(s). |
+| `missingAllPermissions()` | <code>string[] \| string</code> | Assert the store is missing all of the passed permission(s). |
+| `missingAnyPermissions()` | <code>string[] \| string</code> | Assert the store is missing at least 1 of the passed permission(s). |
+| `has()` | <code>string[] \| string</code> | Shorthand accessor for `hasAllRoles()`. |
+| `hasAllRoles()` | <code>string[] \| string</code> | Assert the store has all of the passed role(s). |
+| `hasAnyRoles()` | <code>string[] \| string</code> | Assert the store has any of the passed role(s). |
+| `missingAllRoles()` | <code>string[] \| string</code> | Assert the store is missing all of the passed role(s). |
+| `missingAnyRoles()` | <code>string[] \| string</code> | Assert the store is missing at least 1 of the passed role(s). |
+| `getRoles()` | - | Gets the array of currently stored roles. |
+| `getPermissions()` | - | Gets the array of currently stored permissions. |
+| `setRoles()` | `string[]` | Overwrites the role store with the passed array. |
+| `setPermissions()` | `string[]` | Overwrites the permission store with the passed array. |
+| `addRoles()` | <code>string[] \| string</code> | Adds the given role(s) to the role store. |
+| `addPermissions()` | <code>string \| string[]</code> | Adds the given permission(s) to the permission store. |
+| `clearRoles()` | - | Clears the currently stored roles. |
+| `clearPermissions()` | - | Clears the currently stored permissions. |
+| `clear()` | - | Clears both the role and permission store. |
+
 
 
 <!-- ADVANCED CONFIGURATION -->
@@ -220,10 +244,10 @@ When initialising (`app.use(Vacl, config)`) there are additional properties you 
 <!-- REACTIVITY -->
 ## Reactivity
 
-There are limitations regarding the reactivity in Vue. For instance once an element is 
-removed via a directive it is not currently possible to re-insert it should the user gain
-the necessary role/permission - a page refresh is required. This is an issue with all
-Vue acl-directive packages, but we are currently investigating work-arounds.
+There are some limitations regarding the reactivity in Vue. For instance once an element is 
+removed via a custom directive (pretty much anything other than v-if) it is not currently possible to re-insert 
+it should the user gain the necessary role/permission - a page refresh is required. This is an issue with 
+all Vue acl-directive packages, but we are currently investigating work-arounds.
 
 
 
