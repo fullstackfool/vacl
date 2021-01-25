@@ -1,7 +1,5 @@
-import type { VueWrapper } from '@vue/test-utils';
-import { mount } from '@vue/test-utils';
 import ACL from '@/lib/ACL';
-import { can, cannot, has, hasnt } from '@/lib/Directives';
+import { getWrapper } from '../helpers';
 
 /******************************************************************************
  * PERMISSIONS
@@ -215,24 +213,3 @@ describe('dom removal', () => {
 //         expect(incorrectType).toThrow("Value passed to v-can should be a non-empty string. \"1\" passed.");
 //     });
 // });
-
-/**
- * Create a test wrapper.
- *
- * @param {ACL} acl
- * @param {string} template
- *
- * @returns {VueWrapper<any>}
- */
-function getWrapper(acl: ACL, template: string): VueWrapper<any> {
-    return mount({ template }, {
-        global: {
-            directives: {
-                can: can(acl),
-                cannot: cannot(acl),
-                has: has(acl),
-                hasnt: hasnt(acl)
-            }
-        }
-    });
-}
