@@ -14,7 +14,7 @@ export default class ACL {
      *
      * @returns {ACL}
      */
-    public constructor(config: Config | null = null) {
+    public constructor(config?: Config) {
         this.roles = new Set(config?.roles ?? []);
         this.permissions = new Set(config?.permissions ?? []);
         this.forceRemove = config?.forceRemove ?? false;
@@ -41,7 +41,7 @@ export default class ACL {
     /**
      * Set the roles.
      *
-     * @param {Roles} roles
+     * @param {string[]} roles
      *
      * @returns {ACL}
      */
@@ -54,7 +54,7 @@ export default class ACL {
     /**
      * Set the permissions.
      *
-     * @param {Permissions} permissions
+     * @param {string[]} permissions
      *
      * @returns {ACL}
      */
@@ -67,7 +67,7 @@ export default class ACL {
     /**
      * Add roles to the existing store.
      *
-     * @param {Roles | string} roles
+     * @param {string | string[]} roles
      *
      * @returns {ACL}
      */
@@ -80,7 +80,7 @@ export default class ACL {
     /**
      * Add permissions to the existing store.
      *
-     * @param {Permissions | string} permissions
+     * @param {string | string[]} permissions
      *
      * @returns {ACL}
      */

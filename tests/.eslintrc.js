@@ -24,6 +24,13 @@ module.exports = {
         "jest/prefer-expect-assertions": "off",
         "jest/no-hooks": "off",
         "jest/prefer-called-with": "off",
+        "jest/no-restricted-matchers": [
+            "error",
+            {
+                "toBeFalsy": 'Use toBe(false) instead to avoid unexpected type coercion.',
+                "toBeTruthy": 'Use toBe(true) instead to avoid unexpected type coercion.',
+            }
+        ]
         // "jest/valid-title": ["error", {
         //     mustMatch: {
         //         it: '^should '
