@@ -3,7 +3,10 @@
         "declaration": true,
         "declarationDir": "types",
         "declarationMap": true,
-
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"]
+        },
         "module": "ES2015",
         "rootDir": "src",
         "preserveConstEnums": false,

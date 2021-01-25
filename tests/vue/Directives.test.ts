@@ -1,7 +1,7 @@
 import type { VueWrapper } from '@vue/test-utils';
 import { mount } from '@vue/test-utils';
-import ACL from '../../src/lib/ACL';
-import { can, cannot, has, hasnt } from '../../src/lib/Directives';
+import ACL from '@/lib/ACL';
+import { can, cannot, has, hasnt } from '@/lib/Directives';
 
 /******************************************************************************
  * PERMISSIONS
